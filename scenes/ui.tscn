@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://ot7dsmk00ubs"]
+
+[ext_resource type="Script" path="res://scripts/UI.cs" id="1_5um2r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4lo4y"]
+font_size = 46
+
+[sub_resource type="Theme" id="Theme_qtct4"]
+default_font_size = 46
+
+[node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_5um2r")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 84.0
+offset_right = 471.0
+offset_bottom = 157.0
+text = "Dodge the Creeps"
+label_settings = SubResource("LabelSettings_4lo4y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 475.0
+offset_bottom = 77.0
+text = "0"
+label_settings = SubResource("LabelSettings_4lo4y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeginBtn" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 585.0
+offset_right = 480.0
+offset_bottom = 662.0
+theme = SubResource("Theme_qtct4")
+text = "Start"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="BeginBtn" to="." method="OnBeginBtnPressed"]

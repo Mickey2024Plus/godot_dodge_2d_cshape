@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkwgh78rw1ho2"]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_qkrwe"]
+[ext_resource type="PackedScene" uid="uid://o4ndp5y40x2" path="res://scenes/player.tscn" id="1_xjq5p"]
+[ext_resource type="PackedScene" uid="uid://b8qybpu2nkfpi" path="res://scenes/mob.tscn" id="2_gbame"]
+[ext_resource type="PackedScene" uid="uid://ot7dsmk00ubs" path="res://scenes/ui.tscn" id="4_afege"]
+[ext_resource type="AudioStream" uid="uid://dt5w0qsiiirko" path="res://art/House In a Forest Loop.ogg" id="5_6r474"]
+[ext_resource type="AudioStream" uid="uid://dexnigmu4am8l" path="res://art/gameover.wav" id="6_s4b3d"]
+
+[sub_resource type="Curve2D" id="Curve2D_lx4h6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, -1, 0, 0, 0, 0, 1, -2, 0, 0, 0, 0, 476, -5, 0, 0, 0, 0, 473, 711, 0, 0, 0, 0, 0, 704, 0, 0, 0, 0, 4, -1)
+}
+point_count = 6
+
+[node name="Main" type="Node"]
+script = ExtResource("1_qkrwe")
+MobScene = ExtResource("2_gbame")
+
+[node name="Player" parent="." instance=ExtResource("1_xjq5p")]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_lx4h6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(4, -1)
+rotation = -2.81984
+
+[node name="MobTimer" type="Timer" parent="."]
+
+[node name="Ui" parent="." instance=ExtResource("4_afege")]
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6r474")
+autoplay = true
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_s4b3d")
+
+[connection signal="Hit" from="Player" to="." method="GameOver"]
+[connection signal="BeginGame" from="Ui" to="." method="GameBegin"]
